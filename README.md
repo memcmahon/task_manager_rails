@@ -784,7 +784,7 @@ Refresh your browser and take a look at your terminal.  In your pry session, cal
 => <ActionController::Parameters {"controller"=>"tasks", "action"=>"show", "id"=>"1"} permitted: false>
 ```
 
-We are getting a much simpler params object than when we used a form, and these params include an `:id` that matches with the very end of the uri we visited (/tasks/1).  Looking at our routes, we see that we set up our URI pattern to accept `:id`, but when we visited this site, we typed in `1` which is an actual id that exists in our database.  When we need to get some infomration, like an id, from our route in the form of parameters, we can include a symbol of the thing we are expecting when we set up our route - in this case, we are expecting an `:id`.  So, based on how we set up our routes, we can manipulate and dictate what parameters we want; and what information we will need access to in our controllers.
+We are getting a much simpler params object than when we used a form, and these params include an `:id` that matches with the very end of the uri we visited (/tasks/1).  Looking at our routes, we see that we set up our URI pattern to accept `:id`, but when we visited this site, we typed in `1` which is an actual id that exists in our database.  When we need to get some information, like an id, from our route in the form of parameters, we can include a symbol of the thing we are expecting when we set up our route - in this case, we are expecting an `:id`.  So, based on how we set up our routes, we can manipulate and dictate what parameters we want; and what information we will need access to in our controllers.
 
 Remember that you will need to `exit` your pry session to continue interacting with your site!
 
@@ -826,7 +826,7 @@ In our `config/routes.rb` file, add the following route:
 get '/tasks/:id/edit', to: 'tasks#edit'
 ```
 
-And in our taks scontroller, add the following action:
+And in our tasks controller, add the following action:
 
 ```ruby
 def edit
@@ -849,7 +849,7 @@ Now, we need a view!  This will be similar, but not exactly the same as the view
 
 The way that we have set up this form, including the `@task.title` and `@task.description` as field values, will autofill our form with the current task information, so that a user can update one or both fields and maintain any unchanged information.
 
-Additionally, you'll notice that there's a hidden field with a value of PATCH. Normally, HTML forms only allow GET or POST requests (see more information [here])(http://www.w3schools.com/tags/att_form_method.asp).
+Additionally, you'll notice that there's a hidden field with a value of PATCH. Normally, HTML forms only allow GET or POST requests (see more information [here](http://www.w3schools.com/tags/att_form_method.asp).
 
 We're going to want this form to access a route in our controller (that we'll create momentarily) using PATCH to be consistent with conventions about the HTTP verb that is used when updating a resource (take a quick look at [this](https://www.restapitutorial.com/lessons/httpmethods.html) table if this is new information).
 
@@ -857,7 +857,7 @@ HTML won't allow us to use method='patch' in our form tag, but passing it as a h
 
 ### Updating a Task Resource
 
-Now, our application will need to know what to do when someone submits the edit form, making a `PATCH` request to `/tasks/:id`; so, in our `routes.config.rb`, let's add the following route:
+Now, our application will need to know what to do when someone submits the edit form, making a `PATCH` request to `/tasks/:id`; so, in our `config/routes.rb`, let's add the following route:
 
 ```ruby
 patch '/tasks/:id', to: 'tasks#update'
